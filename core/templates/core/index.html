@@ -3,5 +3,27 @@
 {% block title %}Welcome page{% endblock %}
 
 {% block content %}
-<h1>Welcome</h1>
+<div class="card p-4">
+    <h1 class="text-center">Nowe przedmioty</h1>
+
+    <div class="row">
+        <div class="col-12 d-flex">
+            {% for item in items %}
+                <div>
+                    <a href="#" class="nav-link">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ item.image.url }}" class="card-img-top">
+                            <div class="card-body text-dark">
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">Cena: {{ item.price}} zł</p>
+                                <small>Zostało: {{ item.quantity }} szt.</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

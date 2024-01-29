@@ -4,8 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
 
+from item.models import Item
+
 def index(request):
-    return render(request, 'core/index.html')
+    items = Item.objects.order_by('created_at').all()[:6]
+
+    return render(request, 'core/index.html', {
+        'items': items
+    })
 
 def signup(request):
     if request.method == 'POST':
