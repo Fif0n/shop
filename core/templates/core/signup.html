@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block content %}
+    <div class="card p-4">
+        <h1>Zarejestruj się</h1>
+
+        <form action="." method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Nazwa użytkownika</label>
+                {{ form.username }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Hasło</label>
+                {{ form.password1 }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Powtórz hasło</label>
+                {{ form.password2 }}
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 bg-danger text-white p-1">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button class="btn btn-primary">Zarejestruj się</button>
+        </form>
+    </div>
+{% endblock %}
