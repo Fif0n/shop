@@ -7,10 +7,10 @@
     <h1 class="text-center">Nowe przedmioty</h1>
 
     <div class="row">
-        <div class="col-12 d-flex">
+        <div class="col-12 d-flex flex-wrap">
             {% for item in items %}
                 <div>
-                    <a href="#" class="nav-link">
+                    <a href="{% url 'item:detail' item.id %}" class="nav-link">
                         <div class="card" style="width: 18rem;">
                             <img src="{{ item.image.url }}" class="card-img-top">
                             <div class="card-body text-dark">

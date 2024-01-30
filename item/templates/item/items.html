@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Szukaj przedmiotu{% endblock %}
+
+{% block content %}
+    <div class="card p-4">
+        <h4 class="text-center">Szukaj przedmiotów</h4>
+
+        <div class="row">
+            <div class="col-3">
+                <h5>Filtry</h5>
+                <form class="d-flex flex-column" action="/item/items" method="get">
+
+                    <div>
+                        <input name="name" class="form-control me-2 px-2" type="search" placeholder="Szukaj przedmiotu..." aria-label="Search" value="{{ queryName }}">
+                    </div>
+
+                    <div class="mt-3">
+                        <p>Kategorie: </p>
+                        <div class="input-group mb-3 d-flex flex-column">
+                            {% for category in categories %}
+                                <div class="input-group-text justify-content-between">
+                                    <input class="form-check-input mt-0 p-2" name="category" type="checkbox" value="{{ category.id }}" aria-label="Checkbox for following text input" {% if category.id in queryCategory %}checked{% endif %}>
+                                    <label class="mr-2">{{ category.name }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <button class="btn btn-outline-success" type="submit">Szukaj</button>
+                        <a href="/item/items"class="btn btn-danger">Resetuj filtry</a>
+                    </div>
+                
+                </form>
+            </div>
+
+            <div class="col-9">
+                <div class="d-flex flex-wrap">
+                    {% for item in items %}
+                        <div>
+                            <a href="{% url 'item:detail' item.id %}" class="nav-link">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{ item.image.url }}" class="card-img-top">
+                                    <div class="card-body text-dark">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <p class="card-text">Cena: {{ item.price}} zł</p>
+                                        <small>Zostało: {{ item.quantity }} szt.</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

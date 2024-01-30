@@ -39,4 +39,27 @@ class LoginForm(AuthenticationForm):
         'placeholder': 'Podaj hasło',
         'class': class_style
     }))
+
+class ProfileDataForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Twoja nazwa użytkownika',
+        'class': class_style
+    }))
+
+    email = forms.EmailField(widget=forms.TextInput(attrs={
+        'placeholder': 'Twój email',
+        'class': class_style
+    }))
+    
+class ProfilePasswordForm(forms.Form):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': 'Podaj hasło',
+        'class': class_style
+    }))
+
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': 'Powtórz hasło',
+        'class': class_style
+    }))
+
     

@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+    <div class="card p-4">
+        <div class="row">
+            <div class="bg-light col-8 p-2 d-flex flex-column">
+                <div class="mb-3">
+                    <h3>{{ item.name }}</h3>
+                    <small>Średnia ocen: (0)</small>
+                </div>
+
+                <img src="{{ item.image.url }}" class="img-fluid rounded d-block">
+            </div>
+
+            <div class="bg-light col-4 p-2">
+                <div>
+                    <h5>Opis produktu</h5>
+                    <hr>
+                    <p>{{ item.description }}</p>
+                </div>
+
+                <div>
+                    <h5>Cena</h5>
+                    <hr>
+                    <p>{{ item.price }} zł</p>
+                </div>
+
+                <div>
+                    {% if item.quantity > 0 %}
+                        <h5>Pozostało</h5>
+                        <hr>
+                        <p>{{ item.quantity }} szt</p>
+                    {% else %}
+                        <div class="alert alert-secondary" role="alert">
+                            Aktualnie brak produktu na magazynie
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% if request.user.is_authenticated %}
+                        <button class="btn btn-primary">Dodaj do koszyka</button>
+                    {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            Musisz się zalogować, aby móc zakupić produkt
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
