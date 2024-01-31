@@ -41,7 +41,15 @@
 
                 <div>
                     {% if request.user.is_authenticated %}
-                        <button class="btn btn-primary">Dodaj do koszyka</button>
+                    <form action="{% url 'cart:add' item.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group d-flex flex-column">
+                            <label>Ilość sztuk: </label>
+                            <input type="number" class="input-group-text w-50" name="quantity" value="1" >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-2">Dodaj do koszyka</button>
+                    </form>
                     {% else %}
                         <div class="alert alert-warning" role="alert">
                             Musisz się zalogować, aby móc zakupić produkt
