@@ -8,3 +8,12 @@ class UserCart(models.Model):
     quantity = models.IntegerField()
     added_at = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def total_sum(items):
+        sum = 0
+
+        for item in items:
+            sum += (item.item.price * item.quantity)
+        
+        return sum
+

@@ -50,10 +50,7 @@
                 <div class="col-6">
                     <p>Łączna suma zamówienia: <span class="fw-bold">{{ totla_sum }} zł</span></p>
 
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button class="btn btn-success text-center" type="submit">Złóż zamówienie</button>
-                    </form>
+                    <a href="{% url 'order:submit' %}" class="btn btn-success text-center" type="submit">Złóż zamówienie</a>
                 </div>
             {% endif %}
         </div>
