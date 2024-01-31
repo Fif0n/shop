@@ -5,12 +5,23 @@ from django.contrib import messages
 from .models import UserCart
 from item.models import Item
 
+def __total_sum(items):
+    sum = 0
+
+    for item in items:
+        sum += (item.item.price * item.quantity)
+    
+    return sum
+
 @login_required
 def cart(request):
     cart_items = UserCart.objects.filter(user=request.user)
 
+    totla_sum = __total_sum(cart_items)
+
     return render(request, 'cart/cart.html', {
-        'items': cart_items
+        'items': cart_items,
+        'totla_sum': totla_sum
     })
 
 @login_required
@@ -47,6 +58,7 @@ def remove(request, pk):
     messages.info(request, 'Usunięto przedmiot z koszyka')
 
     return redirect('/cart/cart/')
+
 
 @login_required
 def change_quantity(request, pk):
