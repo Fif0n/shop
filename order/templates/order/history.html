@@ -11,7 +11,7 @@
         <ul class="list-group mx-auto w-50">
             {% for order in orders %}
                 <li class="list-group-item">
-                    <a href="#" class="nav-link text-center text-dark">
+                    <a href="{% url 'order:details' order.id %}" class="nav-link text-center text-dark">
                         <div>
                             <p>Zamówienie nr #{{ order.id }}</p>
                             <small>Złożone dnia {{ order.created_at }}</small>

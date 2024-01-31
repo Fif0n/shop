@@ -13,6 +13,14 @@ class Order(models.Model):
     status = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def total_sum(items):
+        sum = 0
+
+        for item in items:
+            sum += (item.price * item.quantity)
+        
+        return sum
 
 class OrderItem(models.Model):
     price = models.FloatField()

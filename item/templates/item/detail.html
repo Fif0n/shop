@@ -8,7 +8,7 @@
             <div class="bg-light col-8 p-2 d-flex flex-column">
                 <div class="mb-3">
                     <h3>{{ item.name }}</h3>
-                    <small>Średnia ocen: (0)</small>
+                    <small>Średnia ocen: {{ ratings_avg.avg }} ({{ ratings_avg.quantity }})</small>
                 </div>
 
                 <img src="{{ item.image.url }}" class="img-fluid rounded d-block">
@@ -31,7 +31,7 @@
                     {% if item.quantity > 0 %}
                         <h5>Pozostało</h5>
                         <hr>
-                        <p>{{ item.quantity }} szt</p>
+                        <p>{{ item.quantity }} szt.</p>
                     {% else %}
                         <div class="alert alert-secondary" role="alert">
                             Aktualnie brak produktu na magazynie
@@ -45,7 +45,7 @@
                         {% csrf_token %}
                         <div class="input-group d-flex flex-column">
                             <label>Ilość sztuk: </label>
-                            <input type="number" class="input-group-text w-50" name="quantity" value="1" >
+                            <input type="number" class="input-group-text w-50" name="quantity" value="1">
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-2">Dodaj do koszyka</button>
@@ -56,9 +56,33 @@
                         </div>
                     {% endif %}
                 </div>
+
+                <div>
+                    {% if bought %}
+                        <a href="{% url 'item:opinion' item.id %}" class="btn btn-info mt-4 text-white">Dodaj swoją opinię</a>
+                    {% endif %}
+                </div>
             </div>
 
         </div>
 
+        <hr>
+
+        <h4 class="text-center">Opinie użytkowników</h4>
+
+        {% for opinion in opinions %}
+            <div class="card mt-2">
+                <div class="card-header">
+                    Użytkownik {{ opinion.created_by.name }} o godzinie {{ opinion.created_at }}:
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                    <p>{{ opinion.content }}</p>
+                    <footer class="blockquote-footer">Ocena: {{ opinion.rating }}/5</footer>
+                    </blockquote>
+                </div>
+            </div>
+        {% endfor %}
+        
     </div>
 {% endblock %}

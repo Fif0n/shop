@@ -6,5 +6,6 @@ app_name = 'order'
 
 urlpatterns = [
     path('submit/', views.sumbit, name='submit'),
-    path('history/', views.history, name='history')
+    path('history/', views.history, name='history'),
+    path('<int:pk>/details', views.details, name='details')
 ]

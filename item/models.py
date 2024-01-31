@@ -33,5 +33,15 @@ class Opinion(models.Model):
     ])
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, related_name='opinion', on_delete=models.CASCADE)
+
+    @staticmethod
+    def opinion_avg(opinions):
+        values = [i.rating for i in opinions]
+
+        lenght = len(values)
+
+        avg = sum(values) / lenght
+
+        return {'avg': avg, 'quantity': lenght}
     

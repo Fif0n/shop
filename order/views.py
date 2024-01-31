@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -57,4 +57,19 @@ def history(request):
 
     return render(request, 'order/history.html', {
         'orders': orders
+    })
+
+def details(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+
+    items = order.order_item.all()
+    orderData = order.order_data.first()
+
+    total_price = UserCart.total_sum(items)
+
+    return render(request, 'order/details.html', {
+        'order': order,
+        'items': items,
+        'orderData': orderData,
+        'total_price': total_price
     })
