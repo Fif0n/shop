@@ -14,7 +14,8 @@
                     <a href="{% url 'order:details' order.id %}" class="nav-link text-center text-dark">
                         <div>
                             <p>Zamówienie nr #{{ order.id }}</p>
-                            <small>Złożone dnia {{ order.created_at }}</small>
+                            <small>Złożone dnia {{ order.created_at }}</small><br>
+                            <small>Status: {{ order.status }}</small>
                         </div>
                     </a>
                 </li>

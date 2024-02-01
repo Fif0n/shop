@@ -56,9 +56,9 @@
                 <h3 class="px-3">Menu</h3>
 
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-transparent"><a href="#" class="nav-link text-white p-0">Więcej informacji o stronie</a></li>
-                    <li class="list-group-item bg-transparent"><a href="#" class="nav-link text-white p-0">Kontakt</a></li>
-                    <li class="list-group-item bg-transparent"><a href="#" class="nav-link text-white p-0">Sposób użytkowania</a></li>
+                    <li class="list-group-item bg-transparent"><a href="{% url 'core:about' %}" class="nav-link text-white p-0">Więcej informacji o stronie</a></li>
+                    <li class="list-group-item bg-transparent"><a href="{% url 'core:contact' %}" class="nav-link text-white p-0">Kontakt</a></li>
+                    <li class="list-group-item bg-transparent"><a href="{% url 'core:instruction' %}" class="nav-link text-white p-0">Sposób użytkowania</a></li>
                 </ul>
             </div>
         </div>

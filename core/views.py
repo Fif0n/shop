@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib import messages
+import django
 
 from item.models import Item
 
@@ -97,3 +98,12 @@ def profile(request):
         'formProfile': formProfile,
         'formPassword': formPassword
     })
+
+def about(request):
+    return render(request, 'core/about.html')
+
+def contact(request):
+    return render(request, 'core/contact.html')
+
+def instruction(request):
+    return render(request, 'core/instruction.html')

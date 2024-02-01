@@ -35,7 +35,12 @@ def sumbit(request):
 
             delete_from_cart = UserCart.objects.filter(user=request.user)
 
-            delete_from_cart.delete()
+            for item in delete_from_cart:
+                item.item.quantity -= item.quantity
+
+                item.item.save()
+
+                item.delete()
 
             messages.info(request, 'Zamówienie zostało złożone')
 

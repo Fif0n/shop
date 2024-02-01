@@ -3,14 +3,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from item.models import Item
 
-STATUS = {
-    0: 'Zamówienie złożone',
-    1: 'Zamówienie wysłane',
-}
+STATUS = [
+    ('Zamówienie złożone', 'Zamówienie złożone'),
+    ('Zamówienie wysłane', 'Zamówienie wysłane'),
+]
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.IntegerField(default=0)
+    status = models.TextField(choices=STATUS, default=STATUS[0][0])
     created_at = models.DateTimeField(auto_now_add=True)
 
     @staticmethod
@@ -21,6 +21,9 @@ class Order(models.Model):
             sum += (item.price * item.quantity)
         
         return sum
+
+    def __str__(self) -> str:
+        return f'# {self.id}'
 
 class OrderItem(models.Model):
     price = models.FloatField()

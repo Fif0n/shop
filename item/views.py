@@ -50,6 +50,11 @@ def opinion(request, pk):
     item = get_object_or_404(Item, pk=pk)
 
     if request.method == 'POST':
+        if Opinion.objects.filter(created_by=request.user).exists():
+            messages.info(request, 'Opinia nie została dodana. Możesz dodać tylko jedną opinię dla jednego przedmiotu')
+
+            return redirect(f'/item/{pk}/opinion')
+
         form = OpinionForm(request.POST)
 
         if form.is_valid():

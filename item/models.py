@@ -41,7 +41,7 @@ class Opinion(models.Model):
 
         lenght = len(values)
 
-        avg = sum(values) / lenght
+        avg = sum(values) / lenght if lenght > 0 else 0
 
         return {'avg': avg, 'quantity': lenght}
     
